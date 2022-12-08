@@ -15,7 +15,7 @@ jobs:
       - name: Install dependencies
         run: |
           sudo apt-get update &&
-          sudo apt-get install libwayland-dev meson
+          sudo apt-get install libwayland-dev wayland-protocols meson
       
       - name: Clone zigen
         uses: actions/checkout@v2
@@ -39,6 +39,7 @@ jobs:
 
       - name: Test zen-protocols
         run: meson build && ninja -C build test
+        working-directory: ./zen-protocols
         env:
           CC: clang
 
