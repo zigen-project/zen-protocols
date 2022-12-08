@@ -1,1 +1,11 @@
 = ZEN Protocols
+
+== Install
+
+[source, shell]
+----
+$ git clone https://github.com/zigen-project/zen-protocols.git
+$ cd zen-protocols
+$ meson build
+$ ninja -C build install
+----

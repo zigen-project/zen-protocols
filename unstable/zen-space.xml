@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<protocol name="zen_space">
+  <copyright>
+    MIT License
+
+    Copyright (c) 2022 Akihiro Kiuchi &amp; Taishi Eguchi
+
+    Permission is hereby granted, free of charge, to any person
+    obtaining a copy of this software and associated documentation files
+    (the "Software"), to deal in the Software without restriction,
+    including without limitation the rights to use, copy, modify, merge,
+    publish, distribute, sublicense, and/or sell copies of the Software,
+    and to permit persons to whom the Software is furnished to do so,
+    subject to the following conditions:
+
+    The above copyright notice and this permission notice shall be
+    included in all copies or substantial portions of the Software.
+
+    THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+    EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+    MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND
+    NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS
+    BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN
+    ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN
+    CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+    SOFTWARE.
+  </copyright>
+
+  <interface name="zen_space_manager" version="1">
+    <request name="destroy" type="destructor"/>
+
+    <event name="request_space">
+      <arg name="serial" type="uint"/>
+    </event>
+
+    <request name="get_space">
+      <arg name="id" type="new_id" interface="zen_space"/>
+      <arg name="virtual_object" type="object" interface="zgn_virtual_object"/>
+      <arg name="serial" type="uint"/>
+    </request>
+  </interface>
+
+  <interface name="zen_space" version="1">
+    <request name="destroy" type="destructor"/>
+
+    <event name="enter"/>
+
+    <event name="leave"/>
+
+    <event name="release"/>
+  </interface>
+</protocol>
