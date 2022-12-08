@@ -1,0 +1,49 @@
+name: meson_test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Install dependencies
+        run: |
+          sudo apt-get update &&
+          sudo apt-get install libwayland-dev meson
+      
+      - name: Clone zigen
+        uses: actions/checkout@v2
+        with:
+          repository: zigen-project/zigen
+          path: zigen
+
+      - name: Build zigen
+        run: |
+          meson build
+          sudo ninja -C build install
+        working-directory: ./zigen
+        env:
+          CC: clang
+
+      - name: Clone zen-protocols
+        uses: actions/checkout@v2
+        with:
+          repository: zigen-project/zen-protocols
+          path: zen-protocols
+
+      - name: Test zen-protocols
+        run: meson build && ninja -C build test
+        env:
+          CC: clang
+
+      - uses: actions/upload-artifact@v1
+        if: failure()
+        with:
+          name: Test_Log
+          path: zen-protocols/build/meson-logs/testlog.txt
