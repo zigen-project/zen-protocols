@@ -29,14 +29,9 @@
   <interface name="zen_space_manager" version="1">
     <request name="destroy" type="destructor"/>
 
-    <event name="request_space">
-      <arg name="serial" type="uint"/>
-    </event>
-
     <request name="get_space">
       <arg name="id" type="new_id" interface="zen_space"/>
       <arg name="virtual_object" type="object" interface="zgn_virtual_object"/>
-      <arg name="serial" type="uint"/>
     </request>
   </interface>
 
@@ -47,6 +42,8 @@
 
     <event name="leave"/>
 
-    <event name="release"/>
+    <event name="shutdown">
+      <description summary="zen_space will no longer be used after this"/>
+    </event>
   </interface>
 </protocol>
